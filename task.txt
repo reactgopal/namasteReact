@@ -1,0 +1,3 @@
+1.what is a CDN ? why do we use CDN?
+2.what is corssorigin ? why i am write corssorigin?
+3.
