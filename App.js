@@ -22,13 +22,33 @@ import ReactDOM from "react-dom/client";
 // how is this code running?
 
 // JSX => Babel transpiles it to React.createElement => reactElement-js object => HTMLElement(render);
-const jsxHeading = (
+
+const elem = <span>React elements</span>;
+// react Elements
+const Title = () => (
   <h1 id="heading" className="hello">
+    {elem} 
+    <br />
     Namaste react using Jsx 🚀
+    <br />
   </h1>
 );
-console.log(jsxHeading);
+
+const numbers = 10000;
+
+// React functional components
+const HeadingComponent = () => (
+  <div className="container">
+    <Title />
+    <h2>{numbers}</h2>
+    <h2>{100 + 200}</h2>
+    <h1 className="heading">Namaste React functional Component </h1>
+  </div>
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(jsxHeading);
+// root.render(headingComponent2); // you can not render like this because this is component not react element
+// if you render functional component then do this
+
+root.render(<HeadingComponent />);
