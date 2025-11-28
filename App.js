@@ -1,45 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-/**
- * <div class="parent">
- *      <div class="child">
- *          <h1>I'm h1 tag</h1>
- *          <h2>I'm h2 tag</h2>
- *      </div>
- *      <div class="child2">
- *          <h1>I'm h1 tag</h1>
- *          <h2>I'm h2 tag</h2>
- *      </div>
- * </div>
- * 
- * ReactElements(object) =>HTML(Browser Understands)
- */
 
+// React.createElement = this is create basically object
+// when we render this element onto DOM then it's become a html
 
+// React.createElement => object => HTMLElement(render);
+// React.createElement => reactElement-js object => HTMLElement(render);
 
+// how to be rendered on DOM => ReactDOM.render
 
-const parent = React.createElement(
-    "div",
-    { id: "parent" }, [
-    React.createElement("div", { id: "child" }, [
-        React.createElement("h1", {}, "I'm h1 tag"),
-        React.createElement("h2", {}, "I'm h2 tag")
-    ]),
-    React.createElement("div", { id: "child2" }, [
-        React.createElement("h1", {}, "I'm h1 tag"),
-        React.createElement("h2", {}, "I'm h2 tag")
-    ])]
+// const heading = React.createElement(
+//     "h1",
+//     { id: "heading" },
+//     "Namaste React 🚀"
+// );
+
+// JSX = is not html in javascript ,
+// JSX = html-like or XML-like syntax
+// JSX (transpiled before it reaches the JS engine) - parcel - Babel
+
+// how is this code running?
+
+// JSX => Babel transpiles it to React.createElement => reactElement-js object => HTMLElement(render);
+const jsxHeading = (
+  <h1 id="heading" className="hello">
+    Namaste react using Jsx 🚀
+  </h1>
 );
+console.log(jsxHeading);
 
-// jsx
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-console.log(parent);
-
-// const heading = React.createElement("h1", { id: "heading", xyz: "abc", }, "hello world from react!");
-
-
-const root = ReactDOM.createRoot(document.getElementById("root"));// created root for react libraries
-
-
-// root.render(heading); //take a object and converting to h1 tag 
-root.render(parent);
+root.render(jsxHeading);

@@ -20,3 +20,5 @@
 - HTTps 
 - Tree Shaking - parcel will remove unused code for you
 - Different dev and prod bundles
+Caching is a technique used in computing to store copies of frequently accessed data in a temporary storage area called a cache
+
