@@ -1,72 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-/**
- * Header
- *  - Logo
- *  - nav Items
- * Body
- *  - SearchI
- *  - RestaurantContainer
- *    - RestaurantCard
- *       - image,
- * Footer
- *    - Copyright
- *    - Links
- *    - Address
- *    - Contact
- */
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://static.vecteezy.com/system/resources/previews/021/953/308/non_2x/food-ordering-app-logo-with-points-and-fork-shapes-in-the-center-free-vector.jpg"
-          alt="logo"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-/*const styleCard = {
-  backgroundColor: "yellow",
-  padding: "20px",
-  innerWidth: "200px",
-  width: "200px",
-  height: "150px",
-};*/
-
-const RestaurantCard = (props) => {
-  const { resData } = props;
-  const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } =
-    resData;
-
-  return (
-    <div className="restaurant-card">
-      <img
-        alt="restaurant-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          cloudinaryImageId
-        }
-      />
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{avgRating}</h4>
-      <h4>{costForTwo}</h4>
-      <h4>{sla.deliveryTime} mins</h4>
-    </div>
-  );
-};
 const resList = [
   {
     id: "666359",
@@ -173,7 +104,7 @@ const resList = [
     avgRating: 4.4,
     veg: true,
     parentId: "190836",
-    avgRatingString: "4.4",
+    avgRatingString: "2.4",
     totalRatingsString: "2.1K+",
     sla: {
       deliveryTime: 47,
@@ -253,7 +184,7 @@ const resList = [
     areaName: "Salabatpura",
     costForTwo: "₹300 for two",
     cuisines: ["Desserts", "Sweets"],
-    avgRating: 4.5,
+    avgRating: 2.5,
     veg: true,
     parentId: "92975",
     avgRatingString: "4.5",
@@ -339,7 +270,7 @@ const resList = [
     areaName: "Udhna-Surat",
     costForTwo: "₹400 for two",
     cuisines: ["Indian"],
-    avgRating: 4.2,
+    avgRating: 1.2,
     veg: true,
     parentId: "386243",
     avgRatingString: "4.2",
@@ -855,30 +786,4 @@ const resList = [
   },
 ];
 
-// not using key (not acceptable) <<<<< index as key  <<<<<<<< unique id as key (best practice)
-
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search">Search</div>
-      <div className="restaurant-container">
-        {resList.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} resData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <div className="App">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<AppLayout />);
+export default resList;
