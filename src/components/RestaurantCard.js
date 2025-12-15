@@ -1,8 +1,8 @@
-import {CDN_URL} from "../utils/constants";
+import { CDN_URL } from "../utils/constants";
 const RestaurantCard = (props) => {
   const { resData } = props;
   const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } =
-    resData;
+    resData?.info;
 
   return (
     <div className="restaurant-card">
