@@ -1,28 +1,30 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-
+import { Link } from "react-router-dom";
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
-  const [searchText, setSearchText] = useState("");
   const [filterRestaurant, setFilterRestaurant] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
+
+  //Whenever state variable update, react triggers a reconciliation cycle (re-render the component)
+  console.log(filterRestaurant, "filterRestaurant");
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const res = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.9615398&lng=79.2961468&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const res = await fetch("https://namastedev.com/api/v1/listRestaurants");
     const json = await res.json();
     // optional chaining
     setListOfRestaurant(
-      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards[1].card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilterRestaurant(
-      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards[1].card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
@@ -67,7 +69,12 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {filterRestaurant.map((restaurant, index) => (
-          <RestaurantCard key={index} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={`/restaurants/${restaurant.info.id}`}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

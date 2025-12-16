@@ -24,7 +24,7 @@
   Caching is a technique used in computing to store copies of frequently accessed data in a temporary storage area called a cache
 
 #food ordering app
-/\*\*
+ 
 
 - Header
 - - <Logo> </Logo>
@@ -39,8 +39,7 @@
 - - Links
 - - Address
 - - Contact
-    \*/
-
+   */ 
 #There are Two Type of Export/Imports
 
 1.Default import and export
@@ -77,3 +76,17 @@ const arr = useState();
 const [listOfRestaurant, setListOfRestaurant]= arr;
 listOfRestaurant = arr[0];
 setListOfRestaurant = arr[1];
+
+
+
+// if no dependency array => useEffect is called on every render
+// if dependency array is empty = []=> useEffect is called on initial render(just once)
+// if dependency array is [btnNameReact]=> called everyTime btnNameReact is updated
+useEffect(() => {
+console.log("useEffect called");
+}, [btnNameReact]);
+
+
+# 2 types of routing in web apps
+  - Client Side Routing
+  - Server Side Routing
