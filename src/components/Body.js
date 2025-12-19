@@ -9,7 +9,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   //Whenever state variable update, react triggers a reconciliation cycle (re-render the component)
-  console.log(filterRestaurant, "filterRestaurant");
+  // console.log(filterRestaurant, "filterRestaurant");
 
   useEffect(() => {
     fetchData();
@@ -49,6 +49,7 @@ const Body = () => {
               const filterData = listOfRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
+              console.log(filterData, "filterData");
               setFilterRestaurant(filterData);
             }}
           >
@@ -59,9 +60,9 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filterDataLists = listOfRestaurant.filter(
-              (res) => res.avgRating > 4
+              (res) => res.info.avgRating < 4.2
             );
-            setListOfRestaurant(filterDataLists);
+            setFilterRestaurant(filterDataLists);
           }}
         >
           Top Rated Restaurants{" "}

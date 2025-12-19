@@ -8,6 +8,7 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Login from "./components/Login";
+import User from "./components/User";
 
 const AppLayout = () => {
   return (

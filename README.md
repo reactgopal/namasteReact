@@ -24,7 +24,6 @@
   Caching is a technique used in computing to store copies of frequently accessed data in a temporary storage area called a cache
 
 #food ordering app
- 
 
 - Header
 - - <Logo> </Logo>
@@ -39,14 +38,14 @@
 - - Links
 - - Address
 - - Contact
-   */ 
-#There are Two Type of Export/Imports
+    \*/
+    #There are Two Type of Export/Imports
 
-1.Default import and export
-ex = export default components;
-ex = import components from "path";
+    1.Default import and export
+    ex = export default components;
+    ex = import components from "path";
 
-2.Named Import and Exports
+    2.Named Import and Exports
 
 export const Components;
 import {component} from "path";
@@ -58,7 +57,7 @@ import {component} from "path";
 -useEffect()
 
 why react is fast ?
-because it has virtual DoM.it can it has diff alorithm.which every efficient.it can do efficient Dom manipulation. it can find out that diff and update the UI.this is the core of react
+because it has virtual DoM.it can it has diff alorithm.which every efficient.it can do efficient Dom manipulation. it can findout that diff and update the UI.this is the core of react
 
 const [listOfRestaurant, setListOfRestaurant] = useState(resList);
 why can't we just modify it directly because there need to be.
@@ -77,8 +76,6 @@ const [listOfRestaurant, setListOfRestaurant]= arr;
 listOfRestaurant = arr[0];
 setListOfRestaurant = arr[1];
 
-
-
 // if no dependency array => useEffect is called on every render
 // if dependency array is empty = []=> useEffect is called on initial render(just once)
 // if dependency array is [btnNameReact]=> called everyTime btnNameReact is updated
@@ -86,7 +83,48 @@ useEffect(() => {
 console.log("useEffect called");
 }, [btnNameReact]);
 
-
 # 2 types of routing in web apps
-  - Client Side Routing
-  - Server Side Routing
+
+- Client Side Routing
+- Server Side Routing
+
+# life cycle of class Based Component
+
+when the parent component is loaded first of all the
+constructor call -> render()method is called ->on process child component there
+then it's trigger life cycle of child
+child constructor call -> render() method called -> once the mounting of this component is
+finished now the componentdidmount() called
+->once component has been mounted then after component did mount will be called
+then whole child component mount successfully
+than componentDidMount() will be called .
+
+what is use of componentDidMount()?
+componentDidMount use to make api calls.
+
+somethings new
+life cycle of class Based Component has to phase
+1.render phase -> has constructor and render method
+2.commit phase -> react actually updates DOM and componentDidMount is called
+
+react will batch the render phase for the two child
+
+/\*
+
+- parent constructor
+- parent render
+
+  - first constructor
+  - first render
+
+  - second constructor
+  - second render
+    diff is calculated and reconciliation has triggered now after that Batched
+
+Dom updates in Single batch
+
+- first componentDidMount
+- second componentDidMount
+
+- parent componentDidMount
+  \*/
