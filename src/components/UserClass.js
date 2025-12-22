@@ -19,7 +19,7 @@ class UserClass extends React.Component {
     this.setState({ userInfo: response });
   }
   componentWillUnmount() {
-    console.log("child - componentWillUnmount");
+    // console.log("child - componentWillUnmount");
   }
   render() {
     // console.log("child - render");

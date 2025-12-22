@@ -79,6 +79,7 @@ setListOfRestaurant = arr[1];
 // if no dependency array => useEffect is called on every render
 // if dependency array is empty = []=> useEffect is called on initial render(just once)
 // if dependency array is [btnNameReact]=> called everyTime btnNameReact is updated
+
 useEffect(() => {
 console.log("useEffect called");
 }, [btnNameReact]);
@@ -128,3 +129,59 @@ Dom updates in Single batch
 
 - parent componentDidMount
   \*/
+
+# es-9 optimizing our app
+
+what does means of single responsibility principle?
+
+# hook
+
+hook is whether it is our custom hook or whether that hook is given by library.
+end of the day, a hook is just utility function ,normal function.
+
+we will just take out some responsibility from a component and extract it inside a hook so that our hook and our component become more modules and more readable.
+
+how are code more optimized ?
+
+# custom hook
+
+why i need to create custom hook ?
+
+->first create custom hook think this steps
+
+- what is hook is doing .
+- what is it getting there as the input .
+- what it is getting as a output.
+- what is contract of hook.
+
+# parcel
+
+what is parcel ?
+parcel is basically a bundles.basic and important work of bundler is to bundle to our application.
+what is meaning of bundle our application?
+it means that it actually takes all your files and make it into one it bundles all. your files into one file.
+everything that is happening on your web page is happening through one js file all that code is present in one js file. and your parcel is made one js file
+
+# lazy loading
+
+let's take example of Grocery mini application
+so we don't import directly Grocey component in app.js file.
+
+when our app will loads initially , our home page will load it will not load the code of Grocery.
+when i goto grocery page then it will load the code of Grocery
+this is knows as lazy loading and on-demand loading 
+
+setup lazy then get error a component suspended while responding to synchronous input.
+let understand what happened actually.
+when we load this home page ,we only got one file. and that page doesn't not have grocery cod on demand.
+when i click on grocery then will be loaded grocery code .if i click on grocery then get  though error something went wrong??
+because this grocery code takes 12 millisecond to come to the browser .
+react tried to load the grocery component but the code was not there so that is why react suspended the rendering . grocery code was not there.
+take few second to fetch the data of grocery .so at that particular time that middle state.
+causes that error.
+how to hanlde that state we will use suspense.  
+
+=>suspense is component that come's from the react library.
+wrap your component around it and give it a placeholder (fallback) 
+what should react render when code is not available kind of loading screen.
+

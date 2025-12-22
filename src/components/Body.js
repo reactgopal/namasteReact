@@ -2,12 +2,13 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
-
   const [searchText, setSearchText] = useState("");
-
+  const onlineStatus = useOnlineStatus();
+  
   //Whenever state variable update, react triggers a reconciliation cycle (re-render the component)
   // console.log(filterRestaurant, "filterRestaurant");
 
@@ -28,7 +29,9 @@ const Body = () => {
         ?.restaurants
     );
   };
-
+  if (onlineStatus == false) {
+    return <h1>check your internet connection </h1>;
+  }
   return listOfRestaurant.length === 0 ? (
     <Shimmer />
   ) : (
