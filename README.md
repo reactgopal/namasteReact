@@ -185,3 +185,10 @@ how to hanlde that state we will use suspense.
 wrap your component around it and give it a placeholder (fallback) 
 what should react render when code is not available kind of loading screen.
 
+https://tailwindcss.com/
+sass vs scss
+https://styled-components.com/
+https://mui.com/
+https://getbootstrap.com/
+https://chakra-ui.com/
+https://ant.design/

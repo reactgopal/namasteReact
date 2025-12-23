@@ -8,7 +8,7 @@ const Body = () => {
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
-  
+
   //Whenever state variable update, react triggers a reconciliation cycle (re-render the component)
   // console.log(filterRestaurant, "filterRestaurant");
 
@@ -36,18 +36,19 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter-container">
-        <div className="search-container">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-4 sm:p-6 bg-gradient-to-r from-pink-50 to-violet-50 rounded-2xl shadow-sm mx-2 sm:mx-4 my-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 flex-1">
           <input
             type="text"
-            className="search-input"
+            placeholder="Search restaurants..."
+            className="w-full sm:flex-1 px-4 py-2 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm sm:text-base"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="btn-search"
+            className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-gradient-to-r from-orange-400 to-orange-600 text-white font-semibold rounded-lg hover:opacity-90 transition text-sm sm:text-base"
             onClick={() => {
               const filterData = listOfRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -60,18 +61,18 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="filter-btn"
+          className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-white border-2 border-orange-600 text-orange-600 font-semibold rounded-lg hover:bg-pink-50 transition text-sm sm:text-base"
           onClick={() => {
             const filterDataLists = listOfRestaurant.filter(
-              (res) => res.info.avgRating < 4.2
+              (res) => res.info.avgRating > 4.2
             );
             setFilterRestaurant(filterDataLists);
           }}
         >
-          Top Rated Restaurants{" "}
+          ⭐ Top Rated
         </button>
       </div>
-      <div className="restaurant-container">
+      <div className="restaurant-container flex flex-wrap justify-center">
         {filterRestaurant.map((restaurant, index) => (
           <Link
             key={restaurant.info.id}

@@ -5,3 +5,6 @@ export const LOGO_URL =
   "https://static.vecteezy.com/system/resources/previews/021/953/308/non_2x/food-ordering-app-logo-with-points-and-fork-shapes-in-the-center-free-vector.jpg";
 
 export const MENU_API = "https://namastedev.com/api/v1/listRestaurantMenu/";
+
+export const RESTAURANT_IMG =
+  "https://www.shutterstock.com/image-photo/fried-salmon-steak-cooked-green-600nw-2489026949.jpg";
