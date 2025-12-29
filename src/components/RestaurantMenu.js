@@ -1,10 +1,16 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
+  const [showIndex, setShowIndex] = useState(0);
+
+  // props drilling
+  const dummy = "Dummy Data";
 
   if (resInfo === null) {
     return <Shimmer />;
@@ -12,10 +18,13 @@ const RestaurantMenu = () => {
 
   const restaurantData = resInfo?.cards?.[2]?.card?.card?.info;
   const { name, cuisines } = restaurantData || {};
-  const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
-  console.log(itemCards, "data.data");
+  const Categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (cards) =>
+        cards?.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    ) || [];
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 my-6">
@@ -23,26 +32,19 @@ const RestaurantMenu = () => {
         {name}
       </h1>
       <p className="text-sm text-gray-500 mt-1 mb-4">{cuisines.join(", ")}</p>
-      <ul className="grid grid-cols-1 gap-3 divide-y divide-gray-100">
-        {itemCards.map((item) => (
-          <li
-            key={item.card.info.id}
-            className="py-3 flex items-center justify-between gap-4"
-          >
-            <div className="flex-1">
-              <p className="text-md font-medium text-gray-800 truncate">
-                {item.card.info.name}
-              </p>
-            </div>
-
-            <div className="ml-4 text-right">
-              <span className="text-sm text-gray-600">
-                ₹{item.card.info.price / 100 || "N/A"}
-              </span>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {/* categories  Accordions */}
+      {Categories.map((category, index) => (
+        <RestaurantCategory
+          key={category.card.card.title}
+          data={category.card.card}
+          // showItems={index == showIndex && true}
+          // setShowIndex={() => setShowIndex(index)}
+          // showItems={index === showIndex}
+          showItems={index == showIndex}
+          setShowIndex={() => setShowIndex(showIndex === index ? null : index)}
+          dummy={dummy}
+        />
+      ))}
     </div>
   );
 };

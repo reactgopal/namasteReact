@@ -169,20 +169,20 @@ so we don't import directly Grocey component in app.js file.
 
 when our app will loads initially , our home page will load it will not load the code of Grocery.
 when i goto grocery page then it will load the code of Grocery
-this is knows as lazy loading and on-demand loading 
+this is knows as lazy loading and on-demand loading
 
 setup lazy then get error a component suspended while responding to synchronous input.
 let understand what happened actually.
 when we load this home page ,we only got one file. and that page doesn't not have grocery cod on demand.
-when i click on grocery then will be loaded grocery code .if i click on grocery then get  though error something went wrong??
+when i click on grocery then will be loaded grocery code .if i click on grocery then get though error something went wrong??
 because this grocery code takes 12 millisecond to come to the browser .
 react tried to load the grocery component but the code was not there so that is why react suspended the rendering . grocery code was not there.
 take few second to fetch the data of grocery .so at that particular time that middle state.
 causes that error.
-how to hanlde that state we will use suspense.  
+how to hanlde that state we will use suspense.
 
 =>suspense is component that come's from the react library.
-wrap your component around it and give it a placeholder (fallback) 
+wrap your component around it and give it a placeholder (fallback)
 what should react render when code is not available kind of loading screen.
 
 https://tailwindcss.com/
@@ -192,3 +192,54 @@ https://mui.com/
 https://getbootstrap.com/
 https://chakra-ui.com/
 https://ant.design/
+
+# Higher order components
+
+- higher order components is a function that takes a component and returns a components.
+- higher order components they just take a components and they just returns another components outside.that component is an enhanced version of the input components that's all is our higher order components.
+
+# All the react app they have two important layers
+
+1.UI layers
+2.Data layers
+UI layers is powered by data layers
+when i say ui layers it is mostly consisting of what jsx the code you write inside jsx that is ui layer.
+data layer is your state , props, local variables ,your curly braces inside your jsx.
+that javascript code that you write is all modifying the data layer.
+
+#
+
+Restaurant Category are maintaining their own states.
+if i click on another restaurant category . i want all the other restaurant category to know
+that newly added has been expanded. if i click on category.i want my recommended to collapse
+itself.
+create this type of feature. because each of these restaurant category have their onw state.
+they are managing their own state and own show items. they are controlling.
+
+i want this state to be lifted up.
+i don't give the power of show and collapse item list.
+i will give the power of show and expand and collapse to the parent of this child.
+
+i want to give power to restaurant menu to parent of show and expand to restaurant menu.
+
+controlled and uncontrolled components.
+RestaurantCategory is controlled components
+RestaurantMenu menu is controlling the RestaurantCategory components basically.
+when its had own state it was an uncontrolled components because restaurant menu does not have i s control .
+
+# props drilling
+
+props drilling is data passing to parent to child ,child to under of this child.
+
+# react context 
+
+create context
+react gives us access to a important utility function that is known as create context.
+this create context comes from react library.
+
+while we creating context we give it central information to global object.
+
+while we use context,we can just avoid the props drilling. 
+context = which is kind of like a global place where your data is kept and anybody can access it.that is know as react concept context.
+
+context is global space i can provide to whole app and just small portion of app

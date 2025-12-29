@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
+import UserContext from "../utils/UserContext";
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
   const [mobileOpen, setMobileOpen] = useState(false);
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = useContext(UserContext);
 
   useEffect(() => {}, [btnNameReact]);
 
@@ -30,6 +31,7 @@ const Header = () => {
           <Link to="/grocery" className="hover:underline">
             Grocery
           </Link>
+          <li className="text-black font-bold list-none">{loggedInUser}</li>
         </nav>
 
         <div className="flex items-center gap-3">

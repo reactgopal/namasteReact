@@ -1,16 +1,18 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+  const { setUserName, loggedInUser } = useContext(UserContext);
 
   //Whenever state variable update, react triggers a reconciliation cycle (re-render the component)
-  // console.log(filterRestaurant, "filterRestaurant");
 
   useEffect(() => {
     fetchData();
@@ -19,22 +21,21 @@ const Body = () => {
   const fetchData = async () => {
     const res = await fetch("https://namastedev.com/api/v1/listRestaurants");
     const json = await res.json();
+
     // optional chaining
     setListOfRestaurant(
-      json?.data?.data?.cards[1].card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilterRestaurant(
-      json?.data?.data?.cards[1].card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
   if (onlineStatus == false) {
     return <h1>check your internet connection </h1>;
   }
-  return listOfRestaurant.length === 0 ? (
-    <Shimmer />
-  ) : (
+  return (
     <div className="body">
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-4 sm:p-6 bg-gradient-to-r from-pink-50 to-violet-50 rounded-2xl shadow-sm mx-2 sm:mx-4 my-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 flex-1">
@@ -60,6 +61,16 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 flex-1">
+          <h3 className="font-bold text-xl">UserName :</h3>
+          <input
+            type="text"
+            placeholder="LoggedIn user name to modify..."
+            className="w-full sm:flex-1 px-4 py-2 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm sm:text-base"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
         <button
           className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-white border-2 border-orange-600 text-orange-600 font-semibold rounded-lg hover:bg-pink-50 transition text-sm sm:text-base"
           onClick={() => {
@@ -78,7 +89,12 @@ const Body = () => {
             key={restaurant.info.id}
             to={`/restaurants/${restaurant.info.id}`}
           >
-            <RestaurantCard resData={restaurant} />
+            {/* if the restaurant is promoted then add promoted label to it  */}
+            {restaurant.info.promoted ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
