@@ -231,7 +231,7 @@ when its had own state it was an uncontrolled components because restaurant menu
 
 props drilling is data passing to parent to child ,child to under of this child.
 
-# react context 
+# react context
 
 create context
 react gives us access to a important utility function that is known as create context.
@@ -239,7 +239,141 @@ this create context comes from react library.
 
 while we creating context we give it central information to global object.
 
-while we use context,we can just avoid the props drilling. 
+while we use context,we can just avoid the props drilling.
 context = which is kind of like a global place where your data is kept and anybody can access it.that is know as react concept context.
 
 context is global space i can provide to whole app and just small portion of app
+
+# let's build Our store
+
+why do we use redux?
+when you're building a large-scal application redux offers you a great solution for it right handling data,managing your store .
+
+- redux is primarily used for handling state of our application.
+- easier to debug our application.
+- redux offers state managements.
+
+react-redux library is kind of like a bridge between react and redux.
+redux-toolkit
+
+creating cart information store for that using redux toolkit.
+
+# Episode-12 | Let's Build Our Store
+
+# redux toolkit
+
+- INSTALL @reduxjs/toolkit and react-redux
+- build our Store
+- connect our store to our app
+- create a slice (cartSlice)
+- dispatch (action)
+- reducers
+- selector
+
+->store-
+we will use a function which is known as configurestore for create on store.
+
+provide the store to our application
+how to provide?
+something know as provider from react-redux.
+
+there is diff between two libraries this reduxjstoolkit and rtk library has thing to do with redux
+so creating a store a redux thing.
+
+provide this store to application so it's kind a bridge of between our react and redux.
+
+->slice
+createSlice is function and this function take a configuration to create slice.
+configuration is name of slice,intialstate
+createSlice take a configuration .
+1.name of the slice.
+2.initial state is object.
+2.initialState :{
+items:[]||{}
+}
+reducers functions is corresponding to those action for each action(For every action, there is a reducer function that decides how the state should change.)
+
+3.reducers :{
+additemaction:(state,action)=>{
+->action means we will get this payload when we will call this addItemAction
+}
+}
+
+{
+actions:{
+
+},
+reducer
+}
+
+4.two think to import action and reducers.
+
+reducer is responsiable to modify the app store.
+reducer in store is a combination of different small stores. for each slice we have a different reducers.
+
+//mutating the state means directly modifying the state
+
+//subscribing to the store using a selector
+useselector() hook is give us a access of a store.
+
+---
+
+appStore in reducer is combination of different small stores.
+const cartItems = useSelector((store) => store.cart.items);
+in this store will give full access fo stores.
+
+dispatch is function
+
+const handleItem = ()=>{
+dispatch(addItem("pizza")); <- ("") ma je pass karu te maru payload che
+{
+payload:pizza
+}
+}
+why the name is selector because you are selecting a portion of the store.
+
+interviewer asking question
+when you are using useSelector make usre you are subscribing to the right portion of the store.
+
+if you don't subscribe to the right portion of the store so then it will be a {{big performance loss}}
+let me tell you why ?
+
+const itemList = useSelector((store) => store.cart.items);
+
+const store = useSelector((store) => store);
+const Cartitems = store.cart.items;
+
+both code are same
+
+now i am subscribing to the whole store,
+1.const store = useSelector((store) => store);
+and i am extracting my items .
+2.const Cartitems = store.cart.items;
+
+but this is very less efficient store.cart.items.
+
+when we writing this store variable subscribing whole store. whenever anything change inside the store.your cart component will get to know .basically
+the store variable wil be updated whenever anything change in the store and whole to store you don't want to update and subscribe whole store.
+suppose if something is happening inside another slice userlogged in it has nothing to do with cart .
+so why we subscribe to store variable.
+better performane way is to only subscribe to a specific portion of the store.
+
+reducer can be a combination of small reducers.
+
+export default cartSlice.reducer;
+
+above line reducer is a combination of small reducer function. that i write under action.
+
+if we are mutating the state over here.
+state.items.push(action.palyoad);
+
+then what is redux doing behind the scenes?
+redux is mutating , redux is creating an immutable state.
+
+but it is not asking develoers to do it .
+i have to just mutate the state. and it works perfetcly
+fine.
+redux uses something known as Immer library.
+immer library is kind of like finding the difference between
+the original state. the mutated state and then give you back the new state.
+which is an immutable state. a new copy of the state.
